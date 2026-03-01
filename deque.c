@@ -245,8 +245,6 @@ void dequePrint(struct deque *d) {
         return;
     }
 
-    printf("TAMANHO: %d\n", d->size);
-
     n = d->beg;
     while (n != NULL) {
         dequeNodePrint(n);
