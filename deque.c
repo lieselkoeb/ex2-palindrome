@@ -13,6 +13,9 @@
 // Node of the deque (internal structure)
 struct deque_n;
 
+// Creates and returns an empty deque node.
+// Returns NULL if memory allocation fails.
+struct deque_n *makeDequeNode();
 // TYPE DEFINITIONS ----------------------
 
 struct deque {
@@ -28,6 +31,18 @@ struct deque_n {
 };
 
 // INTERNAL HELPERS ----------------------
+
+struct deque_n *makeDequeNode() {
+    struct deque_n *n;
+    
+    if (!(n = malloc(sizeof(struct deque_n)))) {
+        return NULL;
+    }
+    
+    memset(n, 0, sizeof(struct deque_n));
+    
+    return n;
+}
 
 // PUBLIC FUNCTION IMPLEMENTATIONS ----------------------
 
