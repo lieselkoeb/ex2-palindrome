@@ -3,31 +3,42 @@
 #include <string.h>
 #include "deque.h"
 
-char * makeStr (int *strLength);
-void destroyStr (char *str, int strLength);
+char * makeStr (int *strLenght);
+void destroyStr (char *str, int strLenght);
 
 int main() {
-    int strLength;
+    struct deque *d;
+    int strLenght, i;
     char *str;
     
-    strLength = 0;
+    strLenght = 0;
 
-    if (!(str = makeStr(&strLength))) {
+    if (!(str = makeStr(&strLenght))) {
         return 0;
     }
 
-    destroyStr (str, strLength);
+    if (!(d = makeDeque())) {
+        return 0;
+    }
+
+    for (i = 0; i < strLenght; i++) {
+        if ((pushBack(d, str[i])) == 1) {
+            return 0;
+        }
+    }
+
+    destroyStr (str, strLenght);
     str = NULL;
 
     return 0;
 }
 
-char * makeStr (int *strLength) {
+char * makeStr (int *strLenght) {
     int i, strSize, maxSize;
     char *str, *tmp;
     char c;
     
-    if (!strLength) {
+    if (!strLenght) {
         return NULL;
     }
 
@@ -56,17 +67,17 @@ char * makeStr (int *strLength) {
     }
     str[i] = '\0'; // Null-terminate the string
 
-    *strLength = i; // Store the length of the string
+    *strLenght = i; // Store the length of the string
 
     return str;
 }
 
-void destroyStr (char *str, int strLength) {
+void destroyStr (char *str, int strLenght) {
 
     if (!str) {
         return;
     }
 
-    memset(str, 0, strLength);
+    memset(str, 0, strLenght);
     free(str);
 }
