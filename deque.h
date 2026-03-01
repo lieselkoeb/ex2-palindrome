@@ -24,12 +24,14 @@ int pushBack(struct deque *d, char c);
 
 // Removes the character at the front of the deque and stores it in *c.
 // Returns 0 on success.
-// Returns 1 if the deque is empty or an error occurs.
+// Returns 1 if an error occurs.
+// Returns 2 if the deque is empty.
 int popFront(struct deque *d, char *c);
 
 // Removes the character at the back of the deque and stores it in *c.
 // Returns 0 on success.
-// Returns 1 if the deque is empty or an error occurs.
+// Returns 1 if an error occurs.
+// Returns 2 if the deque is empty.
 int popBack(struct deque *d, char *c);
 
 // Returns the number of elements currently stored in the deque.
