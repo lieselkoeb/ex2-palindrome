@@ -5,6 +5,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "deque.h"
 
 // FOWARD DECLARATIONS ----------------------
 
@@ -29,3 +31,14 @@ struct deque_n {
 
 // PUBLIC FUNCTION IMPLEMENTATIONS ----------------------
 
+struct deque *makeDeque() {
+    struct deque *d;
+
+    if (!(d = malloc(sizeof(struct deque)))) {
+        return NULL;
+    }
+
+    memset(d, 0, sizeof(struct deque));
+
+    return d;
+}
