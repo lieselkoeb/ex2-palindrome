@@ -72,7 +72,6 @@ void destroyDequeNode(struct deque_n *n) {
     free(n);
 }
 
-
 // PUBLIC FUNCTION IMPLEMENTATIONS ----------------------
 
 struct deque *makeDeque() {
@@ -174,6 +173,41 @@ int popFront(struct deque *d, char *c) {
     return 0;
 }
 
+
+// Removes the character at the back of the deque and stores it in *c.
+// Frees the removed node to prevent memory leaks.
+// Returns 0 on success.
+// Returns 1 if an error occurs.
+// Returns 2 if the deque is empty.
+int popBack(struct deque *d, char *c) {
+    struct deque_n *n;
+    
+    if ((!d) || (!c)) {
+        return 1;
+    }
+    
+    if (d->size == 0) { // DEQUE IS EMPTY
+        return 2;
+    }
+    
+    n = d->end; // Store the popped node
+    *c = n->c; // Store the character from the popped node in *c
+    
+    if (d->size == 1) { // DEQUE HAS ONLY 1 NODE
+        d->beg = NULL;
+        d->end = NULL;
+    }
+    else { // DEQUE HAS MORE THAN 1 NODE
+        d->end = n->prev; // Update the ending of the deque
+        d->end->next = NULL; // Set the next pointer of the new ending to NULL
+    }
+    
+    d->size--; // Decrease deque size
+    
+    destroyDequeNode(n);
+    
+    return 0;
+}
 int dequeSize(struct deque *d) {
     if (!d) {
         return -1;
