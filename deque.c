@@ -97,6 +97,31 @@ int pushFront(struct deque *d, char c) {
     return 0;
 }
 
+int pushBack(struct deque *d, char c) {
+    struct deque_n *n;
+    if (!d) {
+        return 1;
+    }
+
+    if (!(n = makeDequeNode())) {
+        return 1;
+    }
+
+    n->c = c; // Store character in the node
+
+    if (d->size == 0) { // EMPTY DEQUE
+        d->b = n; // Begginig now points to the new node
+    }
+    else { // DEQUE NOT EMPTY
+        n->p = d->e; // New node points back to the former ending
+        d->e->n = n; // Former ending points to the new node
+    }
+
+    d->e = n; // Ending now points to the new node
+    d->size++; // Increase deque size
+
+    return 0;
+}
 
 int dequeSize(struct deque *d) {
     if (!d) {
