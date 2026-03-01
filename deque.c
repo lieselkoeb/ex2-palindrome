@@ -79,3 +79,12 @@ int pushFront(struct deque *d, char c) {
 
     return 0;
 }
+
+
+int dequeSize(struct deque *d) {
+    if (!d) {
+        return -1;
+    }
+
+    return d->size;
+}
