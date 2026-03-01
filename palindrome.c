@@ -6,9 +6,13 @@
 char * makeStr (int *strLenght);
 void destroyStr (char *str, int strLenght);
 
+// Returns the palindrome status of the deque:
+// 0 = palindrome, 1 = not palindrome, 2 = error, 3 = empty deque.
+int checksPalindrome (struct deque *d);
+
 int main() {
     struct deque *d;
-    int strLenght, i;
+    int strLenght, i, palindrome;
     char *str;
     
     strLenght = 0;
@@ -26,6 +30,23 @@ int main() {
             return 0;
         }
     }
+
+    palindrome = checksPalindrome(d);
+    if (palindrome == 0) {
+        printf("É um palíndromo\n");
+    }
+    else if (palindrome == 1) {
+        printf("Não é um palíndromo\n");
+    }
+    else if (palindrome == 2) {
+        printf("Erro ao consultar palíndromo\n");
+    }
+    else {
+        printf("Palavra não digitada\n\n");
+    }
+
+    destroyDeque(d);
+    d = NULL;
 
     destroyStr (str, strLenght);
     str = NULL;
@@ -80,4 +101,32 @@ void destroyStr (char *str, int strLenght) {
 
     memset(str, 0, strLenght);
     free(str);
+}
+
+int checksPalindrome (struct deque *d) {
+    int dS, i;
+    char first, last;
+
+    if(!d) {
+        return 2;
+    }
+
+    dS = dequeSize(d);
+    if (dS == -1) {
+        return 2;
+    }
+    if (dS == 0) {
+        return 3;
+    }
+
+    while (dequeSize(d) > 1) { 
+        if (((popFront(d, &first)) > 0) || (popBack(d, &last)) > 0) {
+            return 2;
+        }
+        if (first != last) {
+            return 1;
+        }
+    }
+
+    return 0;
 }
