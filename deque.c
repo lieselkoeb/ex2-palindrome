@@ -56,6 +56,10 @@ struct deque *makeDeque() {
 int push_front(struct deque *d, char c) {
     struct deque_n *n;
 
+    if (!d) {
+        return 1;
+    }
+
     if (!(n = makeDequeNode())) {
         return 1;
     }
