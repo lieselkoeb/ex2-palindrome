@@ -15,6 +15,10 @@ struct deque_n;
 // Creates and returns an empty deque node.
 // Returns NULL if memory allocation fails.
 struct deque_n *makeDequeNode();
+
+// Prints the contents of the node.
+void dequeNodePrint(struct deque_n *n);
+
 // TYPE DEFINITIONS ----------------------
 
 struct deque {
@@ -40,6 +44,19 @@ struct deque_n *makeDequeNode() {
 
     return n;
 }
+
+void dequeNodePrint(struct deque_n *n) {
+    if (!n) {
+        return;
+    }
+
+    printf("%c", n->c);
+
+    if (n->n != NULL) {
+        printf(" | ");
+    }
+}
+
 
 // PUBLIC FUNCTION IMPLEMENTATIONS ----------------------
 
@@ -87,4 +104,28 @@ int dequeSize(struct deque *d) {
     }
 
     return d->size;
+}
+
+void dequePrint(struct deque *d) {
+    struct deque_n *n;
+    
+    if (!d) {
+        return;
+    }
+
+    if (d->size == 0) {
+        printf("DEQUE VAZIO\n");
+        return;
+    }
+
+    printf("TAMANHO: %d\n", d->size);
+
+    n = d->b;
+    while (n != NULL) {
+        dequeNodePrint(n);
+        n = n->n;
+    }
+    printf("\n");
+
+    return;
 }
