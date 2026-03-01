@@ -5,7 +5,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "deque.h"
 
 // FOWARD DECLARATIONS ----------------------
@@ -35,12 +34,10 @@ struct deque_n {
 struct deque_n *makeDequeNode() {
     struct deque_n *n;
     
-    if (!(n = malloc(sizeof(struct deque_n)))) {
+    if (!(n = calloc(1, sizeof(struct deque_n)))) {
         return NULL;
     }
-    
-    memset(n, 0, sizeof(struct deque_n));
-    
+
     return n;
 }
 
@@ -49,11 +46,32 @@ struct deque_n *makeDequeNode() {
 struct deque *makeDeque() {
     struct deque *d;
 
-    if (!(d = malloc(sizeof(struct deque)))) {
+    if (!(d = calloc(1, sizeof(struct deque)))) {
         return NULL;
     }
 
-    memset(d, 0, sizeof(struct deque));
-
     return d;
+}
+
+int push_front(struct deque *d, char c) {
+    struct deque_n *n;
+
+    if (!(n = makeDequeNode())) {
+        return 1;
+    }
+
+    n->c = c; // Store character in the node
+
+    if (d->size == 0) { // EMPTY DEQUE
+        d->e = n; // Ending now points to the new node
+    }
+    else { // DEQUE NOT EMPTY
+        n->n = d->b; // New node points to the former begginig
+        d->b->p = n; // Former beggining points back to the new node
+    }
+
+    d->b = n; // Beggining now points to the new node
+    d->size++; // Increase deque size
+
+    return 0;
 }
