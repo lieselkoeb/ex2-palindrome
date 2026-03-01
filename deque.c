@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "deque.h"
 
 // FOWARD DECLARATIONS ----------------------
@@ -59,6 +60,16 @@ void dequeNodePrint(struct deque_n *n) {
     if (n->next != NULL) {
         printf(" | ");
     }
+}
+
+void destroyDequeNode(struct deque_n *n) {
+    if (!n) {
+        return;
+    }
+
+    memset(n, 0, sizeof(struct deque_n));
+
+    free(n);
 }
 
 
