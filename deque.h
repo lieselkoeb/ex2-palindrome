@@ -16,21 +16,21 @@ void destroyDeque(struct deque *d);
 
 // Inserts a character at the front (beginning) of the deque.
 // Returns 0 on success, 1 on failure.
-int push_front(struct deque *d, char c);
+int pushFront(struct deque *d, char c);
 
 // Inserts a character at the back (end) of the deque.
 // Returns 0 on success, 1 on failure.
-int push_back(struct deque *d, char c);
+int pushBack(struct deque *d, char c);
 
 // Removes the character at the front of the deque and stores it in *c.
 // Returns 0 on success.
 // Returns 1 if the deque is empty or an error occurs.
-int pop_front(struct deque *d, char *c);
+int popFront(struct deque *d, char *c);
 
 // Removes the character at the back of the deque and stores it in *c.
 // Returns 0 on success.
 // Returns 1 if the deque is empty or an error occurs.
-int pop_back(struct deque *d, char *c);
+int popBack(struct deque *d, char *c);
 
 // Returns the number of elements currently stored in the deque.
 // Returns -1 if an error occurs.

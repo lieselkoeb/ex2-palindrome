@@ -53,7 +53,7 @@ struct deque *makeDeque() {
     return d;
 }
 
-int push_front(struct deque *d, char c) {
+int pushFront(struct deque *d, char c) {
     struct deque_n *n;
 
     if (!d) {
