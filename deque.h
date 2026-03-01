@@ -4,9 +4,11 @@
 #ifndef DEQUE
 #define DEQUE
 
+struct deque;
+
 // Creates and returns an empty deque.
 // Returns NULL if memory allocation fails.
-struct deque *makeDeque(void);
+struct deque *makeDeque();
 
 // Frees all memory used by the deque, including all nodes.
 // After this call, the deque pointer must not be used anymore.
