@@ -22,14 +22,14 @@ void dequeNodePrint(struct deque_n *n);
 // TYPE DEFINITIONS ----------------------
 
 struct deque {
-    struct deque_n * b; // begginig
-    struct deque_n * e; // ending
+    struct deque_n * beg; // begginig
+    struct deque_n * end; // ending
     int size;
 };
 
 struct deque_n {
-    struct deque_n * n; // next
-    struct deque_n * p; // previous
+    struct deque_n * next; // next
+    struct deque_n * prev; // previous
     char c; // character
 };
 
@@ -52,7 +52,7 @@ void dequeNodePrint(struct deque_n *n) {
 
     printf("%c", n->c);
 
-    if (n->n != NULL) {
+    if (n->next != NULL) {
         printf(" | ");
     }
 }
@@ -84,14 +84,14 @@ int pushFront(struct deque *d, char c) {
     n->c = c; // Store character in the node
 
     if (d->size == 0) { // EMPTY DEQUE
-        d->e = n; // Ending now points to the new node
+        d->end = n; // Ending now points to the new node
     }
     else { // DEQUE NOT EMPTY
-        n->n = d->b; // New node points to the former begginig
-        d->b->p = n; // Former beggining points back to the new node
+        n->next = d->beg; // New node points to the former begginig
+        d->beg->prev = n; // Former beggining points back to the new node
     }
 
-    d->b = n; // Beggining now points to the new node
+    d->beg = n; // Beggining now points to the new node
     d->size++; // Increase deque size
 
     return 0;
@@ -110,14 +110,14 @@ int pushBack(struct deque *d, char c) {
     n->c = c; // Store character in the node
 
     if (d->size == 0) { // EMPTY DEQUE
-        d->b = n; // Begginig now points to the new node
+        d->beg = n; // Begginig now points to the new node
     }
     else { // DEQUE NOT EMPTY
-        n->p = d->e; // New node points back to the former ending
-        d->e->n = n; // Former ending points to the new node
+        n->prev = d->end; // New node points back to the former ending
+        d->end->next = n; // Former ending points to the new node
     }
 
-    d->e = n; // Ending now points to the new node
+    d->end = n; // Ending now points to the new node
     d->size++; // Increase deque size
 
     return 0;
@@ -145,10 +145,10 @@ void dequePrint(struct deque *d) {
 
     printf("TAMANHO: %d\n", d->size);
 
-    n = d->b;
+    n = d->beg;
     while (n != NULL) {
         dequeNodePrint(n);
-        n = n->n;
+        n = n->next;
     }
     printf("\n");
 
