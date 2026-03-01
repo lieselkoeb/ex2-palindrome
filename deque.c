@@ -84,6 +84,23 @@ struct deque *makeDeque() {
     return d;
 }
 
+void destroyDeque(struct deque *d) {
+    char c;
+
+    if (!d) {
+        return;
+    }
+
+    while(d->size > 0) {
+        popFront(d, &c);
+    }
+
+    memset(d, 0, sizeof(struct deque));
+
+    free(d);
+}
+
+
 int pushFront(struct deque *d, char c) {
     struct deque_n *n;
 
@@ -173,7 +190,6 @@ int popFront(struct deque *d, char *c) {
     return 0;
 }
 
-
 // Removes the character at the back of the deque and stores it in *c.
 // Frees the removed node to prevent memory leaks.
 // Returns 0 on success.
@@ -208,6 +224,7 @@ int popBack(struct deque *d, char *c) {
     
     return 0;
 }
+
 int dequeSize(struct deque *d) {
     if (!d) {
         return -1;
